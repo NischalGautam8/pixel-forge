@@ -37,14 +37,27 @@ router.post('/', async (req, res) => {
 });
 
 
+import fs from 'fs';
+import path from 'path';
+
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  // TODO: Fetch job from DB
+  
+  // Quick file-system check since DB isn't hooked up yet for status polling
+  const filePath = path.join(__dirname, '../../../../uploads', `${id}.png`);
+  
+  if (fs.existsSync(filePath)) {
+    return res.json({
+      id,
+      status: "completed",
+      imageUrl: `http://localhost:3001/uploads/${id}.png`
+    });
+  }
   
   res.json({
     id,
     status: "processing",
-    message: "Job status (mock)"
+    message: "Image is being generated..."
   });
 });
 
