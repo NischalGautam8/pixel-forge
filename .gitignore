@@ -1,0 +1,18 @@
+.env
+node_modules
+venv
+.venv
+dist
+
+# Next.js
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# Ignore the ComfyUI installation and downloaded models/outputs
+worker/comfyui/
+worker/models/
+
+# Ignore local API uploads
+apps/api/uploads/
